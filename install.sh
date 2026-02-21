@@ -117,7 +117,7 @@ main() {
         ext="zip"
     fi
     archive="${BINARY}_${version}_${os}_${arch}.${ext}"
-    checksums="${BINARY}_${version}_checksums.txt"
+    checksums="checksums.txt"
 
     tmpdir=$(mktemp -d)
     trap 'rm -rf "$tmpdir"' EXIT
