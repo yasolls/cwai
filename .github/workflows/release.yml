@@ -12,6 +12,9 @@ jobs:
   release:
     runs-on: ubuntu-latest
 
+    env:
+      HAS_CWAI_KEY: ${{ secrets.CWAI_API_KEY != '' }}
+
     steps:
       - uses: actions/checkout@v6
         with:
@@ -25,7 +28,7 @@ jobs:
         run: go build -o cwai .
 
       - name: Generate release notes
-        if: ${{ secrets.CWAI_API_KEY != '' }}
+        if: env.HAS_CWAI_KEY == 'true'
         run: |
           TAG=${GITHUB_REF#refs/tags/}
           PREV_TAG=$(git describe --tags --abbrev=0 "${TAG}^" 2>/dev/null || echo "")
@@ -39,11 +42,18 @@ jobs:
           CWAI_API_URL: ${{ secrets.CWAI_API_URL }}
           CWAI_MODEL: ${{ secrets.CWAI_MODEL }}
 
+      - name: Set goreleaser args
+        id: args
+        run: |
+          if [ "$HAS_CWAI_KEY" = "true" ] && [ -f /tmp/release-notes.md ]; then
+            echo "release_notes=--release-notes /tmp/release-notes.md" >> "$GITHUB_OUTPUT"
+          else
+            echo "release_notes=" >> "$GITHUB_OUTPUT"
+          fi
+
       - uses: goreleaser/goreleaser-action@v7
         with:
           version: latest
-          args: >-
-            release --clean
-            ${{ secrets.CWAI_API_KEY != '' && '--release-notes /tmp/release-notes.md' || '' }}
+          args: release --clean ${{ steps.args.outputs.release_notes }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
