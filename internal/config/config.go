@@ -23,9 +23,10 @@ type Config struct {
 	Model            string
 	Language         string
 	MaxTokensInput   int
-	MaxTokensOutput  int
-	Temperature      float64
-	HasTemperature   bool
+	MaxTokensOutput    int
+	HasMaxTokensOutput bool
+	Temperature        float64
+	HasTemperature     bool
 	ReasoningEffort  string
 	Verbosity        string
 	StructuredOutput string
@@ -84,6 +85,7 @@ func Load() (*Config, error) {
 	if v := sec.Key("CWAI_MAX_TOKENS_OUTPUT").String(); v != "" {
 		if n, err := strconv.Atoi(v); err == nil && n > 0 {
 			cfg.MaxTokensOutput = n
+			cfg.HasMaxTokensOutput = true
 		}
 	}
 	if v := sec.Key("CWAI_TEMPERATURE").String(); v != "" {

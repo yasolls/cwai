@@ -27,7 +27,7 @@ var rootCmd = &cobra.Command{
 
 func init() {
 	rootCmd.Flags().BoolVar(&hookFlag, "hook", false, "run in git hook mode (prepare-commit-msg)")
-	rootCmd.Flags().MarkHidden("hook")
+	_ = rootCmd.Flags().MarkHidden("hook")
 	rootCmd.Flags().BoolVarP(&yesFlag, "yes", "y", false, "auto-accept generated commit message")
 
 	rootCmd.AddCommand(configCmd)
@@ -172,15 +172,16 @@ func generate(cfg *config.Config) (string, error) {
 	}
 
 	client := ai.NewClient(ai.Params{
-		APIKey:           cfg.APIKey,
-		APIURL:           cfg.APIURL,
-		Model:            cfg.Model,
-		MaxTokensOutput:  cfg.MaxTokensOutput,
-		Temperature:      cfg.Temperature,
-		HasTemperature:   cfg.HasTemperature,
-		ReasoningEffort:  cfg.ReasoningEffort,
-		Verbosity:        cfg.Verbosity,
-		StructuredOutput: cfg.StructuredOutput,
+		APIKey:             cfg.APIKey,
+		APIURL:             cfg.APIURL,
+		Model:              cfg.Model,
+		MaxTokensOutput:    cfg.MaxTokensOutput,
+		HasMaxTokensOutput: cfg.HasMaxTokensOutput,
+		Temperature:        cfg.Temperature,
+		HasTemperature:     cfg.HasTemperature,
+		ReasoningEffort:    cfg.ReasoningEffort,
+		Verbosity:          cfg.Verbosity,
+		StructuredOutput:   cfg.StructuredOutput,
 	})
 
 	isStructured := client.IsStructuredOutput()

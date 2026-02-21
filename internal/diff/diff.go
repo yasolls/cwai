@@ -23,7 +23,7 @@ func Truncate(maxTokens int) (string, error) {
 	var header strings.Builder
 	header.WriteString("Files changed:\n")
 	for _, f := range files {
-		header.WriteString(fmt.Sprintf("  %s (+%s/-%s)\n", f.File, f.Added, f.Removed))
+		fmt.Fprintf(&header, "  %s (+%s/-%s)\n", f.File, f.Added, f.Removed)
 	}
 	header.WriteString("\n")
 
@@ -46,7 +46,7 @@ func Truncate(maxTokens int) (string, error) {
 		diffTokens := estimateTokens(fileDiff)
 		if diffTokens > budgetTokens {
 			remaining := len(files) - i
-			result.WriteString(fmt.Sprintf("[Diff truncated. %d more files not shown.]\n", remaining))
+			fmt.Fprintf(&result, "[Diff truncated. %d more files not shown.]\n", remaining)
 			break
 		}
 
@@ -57,7 +57,7 @@ func Truncate(maxTokens int) (string, error) {
 	}
 
 	if included == 0 && len(files) > 0 {
-		result.WriteString(fmt.Sprintf("[Diff truncated. %d files not shown.]\n", len(files)))
+		fmt.Fprintf(&result, "[Diff truncated. %d files not shown.]\n", len(files))
 	}
 
 	return result.String(), nil

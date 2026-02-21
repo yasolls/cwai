@@ -20,16 +20,19 @@ const (
 	ModelFamilyGPT5
 )
 
+const DefaultReasoningMaxTokensOutput = 1024
+
 type Params struct {
-	APIKey           string
-	APIURL           string
-	Model            string
-	MaxTokensOutput  int
-	Temperature      float64
-	HasTemperature   bool
-	ReasoningEffort  string
-	Verbosity        string
-	StructuredOutput string
+	APIKey             string
+	APIURL             string
+	Model              string
+	MaxTokensOutput    int
+	HasMaxTokensOutput bool
+	Temperature        float64
+	HasTemperature     bool
+	ReasoningEffort    string
+	Verbosity          string
+	StructuredOutput   string
 }
 
 type Client struct {
@@ -39,6 +42,14 @@ type Client struct {
 
 func NewClient(p Params) *Client {
 	p.APIURL = strings.TrimRight(p.APIURL, "/")
+
+	if !p.HasMaxTokensOutput {
+		family := DetectModelFamily(p.Model)
+		if family == ModelFamilyReasoning || family == ModelFamilyGPT5 {
+			p.MaxTokensOutput = DefaultReasoningMaxTokensOutput
+		}
+	}
+
 	return &Client{
 		params: p,
 		http: &http.Client{
@@ -56,7 +67,15 @@ func DetectModelFamily(model string) ModelFamily {
 
 	if strings.HasPrefix(m, "o1") ||
 		strings.HasPrefix(m, "o3") ||
-		strings.HasPrefix(m, "o4") {
+		strings.HasPrefix(m, "o4") ||
+		strings.HasPrefix(m, "deepseek-reasoner") ||
+		strings.HasPrefix(m, "deepseek-r1") ||
+		strings.HasPrefix(m, "qwq") ||
+		strings.HasPrefix(m, "gemini-2.5") ||
+		strings.HasPrefix(m, "gemini-3") ||
+		strings.HasPrefix(m, "glm-4.6") ||
+		strings.HasPrefix(m, "glm-4.7") ||
+		strings.Contains(m, "-thinking") {
 		return ModelFamilyReasoning
 	}
 
@@ -106,7 +125,7 @@ func (c *Client) GenerateCommitMessage(messages []prompt.Message) (string, error
 	if err != nil {
 		return "", fmt.Errorf("API request failed: %w", err)
 	}
-	defer resp.Body.Close()
+	defer func() { _ = resp.Body.Close() }()
 
 	respBody, err := io.ReadAll(resp.Body)
 	if err != nil {
