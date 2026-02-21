@@ -1,8 +1,6 @@
 <p align="center">
-  <img src="assets/logo.png" width="128" alt="cwai logo">
+  <img src="assets/logo.png" width="420" alt="cwai — Make commits with AI">
 </p>
-
-<h1 align="center">cwai</h1>
 
 <p align="center">
   AI-powered conventional commit message generator from staged git changes.
