@@ -48,16 +48,23 @@ http_download() {
     fi
 }
 
-http_get_redirect() {
+http_copy() {
     url=$1
     if command -v curl >/dev/null 2>&1; then
-        curl -fsSIL -o /dev/null -w '%{url_effective}' "$url" 2>/dev/null
+        curl -fsSL "$url" 2>/dev/null
     elif command -v wget >/dev/null 2>&1; then
-        wget -S --spider --max-redirect=0 "$url" 2>&1 | grep -i 'Location:' | sed 's/.*Location: *//' | tr -d '\r'
+        wget -qO- "$url" 2>/dev/null
     else
         echo "error: curl or wget required" >&2
         return 1
     fi
+}
+
+get_latest_tag() {
+    url="https://api.github.com/repos/${OWNER}/${REPO}/releases/latest"
+    json=$(http_copy "$url")
+    tag=$(printf '%s' "$json" | tr -s '\n' ' ' | sed 's/.*"tag_name": *"//' | sed 's/".*//')
+    printf '%s' "$tag"
 }
 
 hash_sha256() {
@@ -89,8 +96,7 @@ main() {
     arch=$(uname_arch)
     echo "Detected platform: ${os}/${arch}"
 
-    redirect_url=$(http_get_redirect "${GITHUB}/${OWNER}/${REPO}/releases/latest")
-    tag=$(printf '%s' "$redirect_url" | grep -oE '[^/]+$')
+    tag=$(get_latest_tag)
     if [ -z "$tag" ]; then
         echo "error: unable to detect latest version" >&2
         exit 1
