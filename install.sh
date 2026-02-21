@@ -51,9 +51,17 @@ http_download() {
 http_copy() {
     url=$1
     if command -v curl >/dev/null 2>&1; then
-        curl -fsSL "$url" 2>/dev/null
+        if [ -n "$GITHUB_TOKEN" ]; then
+            curl -fsSL -H "Authorization: token ${GITHUB_TOKEN}" "$url" 2>/dev/null
+        else
+            curl -fsSL "$url" 2>/dev/null
+        fi
     elif command -v wget >/dev/null 2>&1; then
-        wget -qO- "$url" 2>/dev/null
+        if [ -n "$GITHUB_TOKEN" ]; then
+            wget -qO- --header="Authorization: token ${GITHUB_TOKEN}" "$url" 2>/dev/null
+        else
+            wget -qO- "$url" 2>/dev/null
+        fi
     else
         echo "error: curl or wget required" >&2
         return 1
