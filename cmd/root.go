@@ -20,6 +20,7 @@ var rootCmd = &cobra.Command{
 	Use:   "cwai",
 	Short: "AI-powered commit message generator",
 	Long:  "cwai generates conventional commit messages using AI from your staged changes.",
+	Args:  cobra.ArbitraryArgs,
 	RunE:  runRoot,
 }
 
