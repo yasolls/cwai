@@ -15,6 +15,7 @@ import (
 )
 
 var hookFlag bool
+var yesFlag bool
 
 var rootCmd = &cobra.Command{
 	Use:   "cwai",
@@ -27,6 +28,7 @@ var rootCmd = &cobra.Command{
 func init() {
 	rootCmd.Flags().BoolVar(&hookFlag, "hook", false, "run in git hook mode (prepare-commit-msg)")
 	rootCmd.Flags().MarkHidden("hook")
+	rootCmd.Flags().BoolVarP(&yesFlag, "yes", "y", false, "auto-accept generated commit message")
 
 	rootCmd.AddCommand(configCmd)
 	rootCmd.AddCommand(setupCmd)
@@ -106,6 +108,15 @@ func runStandalone() error {
 	message, err := generate(cfg)
 	if err != nil {
 		return err
+	}
+
+	if yesFlag {
+		fmt.Println(message)
+		if err := git.Commit(message); err != nil {
+			return fmt.Errorf("commit failed: %w", err)
+		}
+		fmt.Println("Committed successfully!")
+		return nil
 	}
 
 	for {
