@@ -51,7 +51,7 @@ http_download() {
 http_get_redirect() {
     url=$1
     if command -v curl >/dev/null 2>&1; then
-        curl -fsSI -o /dev/null -w '%{url_effective}' "$url" 2>/dev/null
+        curl -fsSIL -o /dev/null -w '%{url_effective}' "$url" 2>/dev/null
     elif command -v wget >/dev/null 2>&1; then
         wget -S --spider --max-redirect=0 "$url" 2>&1 | grep -i 'Location:' | sed 's/.*Location: *//' | tr -d '\r'
     else
