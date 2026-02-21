@@ -57,6 +57,10 @@ INI file at `~/.cwai`. Key settings: `CWAI_API_KEY`, `CWAI_API_URL`, `CWAI_MODEL
 
 When asked to commit, use `cwai` instead of `git commit`: stage files with `git add`, then run `cwai` to generate and apply the commit message. Use `cwai --yes` (or `cwai -y`) for non-interactive mode (CI, scripts, agents).
 
+## Merge Strategy
+
+Squash and merge only. Every PR merges as a single squashed commit into `main`.
+
 ## Conventions
 
 - Conventional Commits format: `type(scope): description` + optional bullet points

@@ -16,4 +16,4 @@ What does this PR do? Briefly describe the changes.
 - [ ] Tests added/updated for changes
 - [ ] All tests pass (`go test ./...`)
 - [ ] Code formatted with `gofmt`
-- [ ] Commits follow [Conventional Commits](https://www.conventionalcommits.org/)
+- [ ] PR title follows [Conventional Commits](https://www.conventionalcommits.org/) (it becomes the squashed commit message)

@@ -47,7 +47,8 @@ Open a [feature request](https://github.com/nikmd1306/cwai/issues/new?template=f
 
 ## Pull Request Guidelines
 
-- Conventional Commits for all commit messages (pro tip: `make install && cwai` — dogfood at its finest)
+- **Squash and merge only** — every PR is squashed into a single commit on `main`. Don't worry about keeping a perfect commit history inside your PR branch; the PR title becomes the final commit message
+- Conventional Commits for the PR title (pro tip: `make install && cwai` — dogfood at its finest)
 - Add tests for new functionality
 - Ensure all existing tests pass
 - Keep PRs focused — one feature or fix per PR
