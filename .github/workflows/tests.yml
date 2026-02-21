@@ -46,4 +46,4 @@ jobs:
         run: bash install.sh -b "${{ runner.temp }}/bin"
 
       - name: Verify binary
-        run: "${{ runner.temp }}/bin/cwai" --help
+        run: ${{ runner.temp }}/bin/cwai --help
